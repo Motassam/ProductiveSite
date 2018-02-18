@@ -14,26 +14,74 @@ if(isset($_POST['loginBtn']))
 	else
 		$missing_input[] = 'ادخل كلمة المرور';
 		
+	$type=$_POST['type'];
+	
 	if(empty($missing_input))
 	{
-		$sql="SELECT * FROM customer WHERE username='$username' and password='$password' LIMIT 1";
-		$result = mysqli_query($connection,$sql);
-		$row = mysqli_fetch_array($result, MYSQLI_BOTH);
-		$count = mysqli_num_rows($result);
-		if($count==1)
-		{
-			session_start();
-			$_SESSION['customer_id'] = $row['customer_id'];
-			$_SESSION['username'] = $row['username'];
-			$_SESSION['fullname'] = $row['firstname'] . ' ' . $row['lastname'];
-			 
-			 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=customer/view_products.php">';    
-			 exit;
-			
-		} else if($count==0) {
-			$missing_input[] = 'انت غير مخول لك الدخول الى الحساب';
-			ShowErrors($missing_input);
+		if($type == 0) {
+			$sql="SELECT * FROM admin WHERE username='$username' and password='$password' LIMIT 1";
+			$result = mysqli_query($connection,$sql);
+			$row = mysqli_fetch_array($result, MYSQLI_BOTH);
+			$count = mysqli_num_rows($result);
+			if($count==1)
+			{
+				session_start();
+				$_SESSION['admin_id'] = $row['admin_id'];
+				$_SESSION['username'] = $row['username'];
+				 
+				 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=admin/index.php">';    
+				 exit;
+				
+			} else if($count==0) {
+				$err = 'انت غير مخول لك الدخول الى الحساب';
+				echo "<div class='alert alert-warning' style='max-width:500px; margin: 4px auto'>";
+					echo '<h4 align="center">' . $err . '</h4>';
+				echo "</div>";
+			}
+		} else if($type == 1) {
+			$sql="SELECT * FROM productive_family WHERE username='$username' and password='$password' LIMIT 1";
+			$result = mysqli_query($connection,$sql);
+			$row = mysqli_fetch_array($result, MYSQLI_BOTH);
+			$count = mysqli_num_rows($result);
+			if($count==1)
+			{
+				session_start();
+				$_SESSION['family_id'] = $row['family_id'];
+				$_SESSION['username'] = $row['username'];
+				$_SESSION['fullname'] = $row['fullname'];
+				 
+				 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=family/index.php">';    
+				 exit;
+				
+			} else if($count==0) {
+				$err = 'انت غير مخول لك الدخول الى الحساب';
+				echo "<div class='alert alert-warning' style='max-width:500px; margin: 4px auto'>";
+					echo '<h4 align="center">' . $err . '</h4>';
+				echo "</div>";
+			}
+		} else if($type == 2) {
+			$sql="SELECT * FROM customer WHERE username='$username' and password='$password' LIMIT 1";
+			$result = mysqli_query($connection,$sql);
+			$row = mysqli_fetch_array($result, MYSQLI_BOTH);
+			$count = mysqli_num_rows($result);
+			if($count==1)
+			{
+				session_start();
+				$_SESSION['customer_id'] = $row['customer_id'];
+				$_SESSION['username'] = $row['username'];
+				$_SESSION['fullname'] = $row['fullname'];
+				 
+				 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=customer/index.php">';    
+				 exit;
+				
+			} else if($count==0) {
+				$err = 'انت غير مخول لك الدخول الى الحساب';
+				echo "<div class='alert alert-warning' style='max-width:500px; margin: 4px auto'>";
+					echo '<h4 align="center">' . $err . '</h4>';
+				echo "</div>";
+			}
 		}
+		
 	} else {
 		foreach($missing_input as $e) {
 			echo "<div class='alert alert-danger' style='max-width:500px; margin: 4px auto'>";
@@ -53,6 +101,11 @@ if(isset($_POST['loginBtn']))
         <tr>
            <th>نوع الحساب</th>
            <td><table width="200">
+             <tr>
+               <td><label>
+                 <input type="radio" name="type" value="0" id="type_2" />
+               حساب مدير الموقع</label></td>
+             </tr>
              <tr>
                <td><label>
                  <input name="type" type="radio" id="type_0" value="1" checked="checked" />

@@ -12,6 +12,11 @@ if(isset($_POST['createBtn']))
 		$ln=$_POST['ln'];
 	else
 		$missing_input[] = 'نسيت ادخال اسم العائلة ';
+		
+	if(!empty($_POST['nationality']))
+		$nationality=$_POST['nationality'];
+	else
+		$missing_input[] = 'نسيت ادخال الجنسية ';
 	
 	if(empty($_POST['email'])) {
 		$missing_input[] = "نسيت ادخال البريد الالكتروني";
@@ -45,18 +50,25 @@ if(isset($_POST['createBtn']))
 		$missing_input[] = 'نسيت ادخال كلمة المرور';
 	
 	
-	
+	$type=$_POST['type'];
 
 	if(empty($missing_input))
 	{
-			
-		$sql="INSERT INTO customer VALUES(NULL,'$fn','$ln','$email','$mobile','$address',20000,'$username','$password',NOW(),NULL)";
+		
+		if($type == 1) {
+			$sql="INSERT INTO productive_family VALUES(NULL,'$fn','$nationality','$email','$mobile','$address',0,'$username','$password',NOW(),10000)";
+		} elseif($type == 2) {
+			$sql="INSERT INTO customer VALUES(NULL,'$fn','$nationality','$email','$mobile','$address',0,'$username','$password',NOW(),10000)";
+		}
+		
 		//echo $sql . "<br>";
 		$result2= mysqli_query($connection,$sql);
 		if($result2) {
-			ShowOKMesaage('تم انشاء الحساب بنجاح');
+			echo "<div class='alert alert-success' style='max-width:500px; margin: 4px auto'>";
+				echo '<h4 align="center">تم تسجيل الحساب بنجاح</h4>';
+			echo "</div>";
 			if($result2) {
-				echo '<META HTTP-EQUIV="Refresh" Content="2; URL=login.php"/>';
+				echo '<META HTTP-EQUIV="Refresh" Content="2; URL=?page=login"/>';
 				exit;
 			}
 		}
@@ -101,6 +113,10 @@ if(isset($_POST['createBtn']))
         <tr>
           <th>اسم العائلة</th>
           <td><input type="text" class="form-control" name="ln" id="ln" placeholder="ادخل اسم العائلة"></td>
+        </tr>
+        <tr>
+          <th>الاسم الاول</th>
+          <td><input type="text" class="form-control" name="nationality" id="nationality" placeholder="ادخل الجنسية"></td>
         </tr>
         <tr>
           <th>رقم الهاتف</th>
