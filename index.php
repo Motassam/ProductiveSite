@@ -41,12 +41,12 @@
         
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="index.php">الرئيسية <span class="sr-only">(current)</span></a></li>
+                <li <?php if(!isset($_GET['page'])) echo ' class="active" '; ?>><a href="index.php">الرئيسية <span class="sr-only">(current)</span></a></li>
                 <li><a href="#">المأكولات والمشروبات</a></li>
                	<li><a href="#">الحرف اليدوية والمجوهرات</a></li>
                 <li><a href="#">الفنون</a></li>
                 <li><a href="#">الخدمات وتنسيق الحفلات</a></li>
-                <li><a href="?page=contact">اتصل بنا</a></li>
+                <li  <?php if(isset($_GET['page']) and $_GET['page'] =='contact') echo ' class="active" '; ?>><a href="?page=contact">اتصل بنا</a></li>
               </ul>
               
               <ul class="nav navbar-nav navbar-right">
@@ -59,60 +59,7 @@
     	</nav>
     
     <div class="clearfix"></div>
-    <section id="slider">
-            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-              <!-- Indicators -->
-              <ol class="carousel-indicators">
-                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-              </ol>
-            
-              <!-- Wrapper for slides -->
-              <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                  <img src="imgs/sliders/slider2.jpg" alt="..." class="img-responsive" style="width: 100%">
-                  <div class="carousel-caption">
-                    <h2>دعنا نشاركك أجمل اللحظات لديك، ونهتم بأدق التفاصيل</h2>
-                    <p>
-                    تفاصيل مناسباتك بتقديم مجموعة من مختصي تنظيم الحفلات لتختار ما يناسبك	
-                    </p>
-                    <a href="#" class="btn btn-default btn-lg">احجز الان</a>
-                  </div>
-                </div>
-                <div class="item">
-                  <img src="imgs/sliders/slider1.jpg" alt="..." class="img-responsive" style="width: 100%">
-                  <div class="carousel-caption">
-                    <h2>دعنا نشاركك أجمل اللحظات لديك، ونهتم بأدق التفاصيل</h2>
-                    <p>
-                    تفاصيل مناسباتك بتقديم مجموعة من مختصي تنظيم الحفلات لتختار ما يناسبك	
-                    </p>
-                    <a href="#" class="btn btn-default btn-lg">احجز الان</a>
-                  </div>
-                </div>
-                <div class="item">
-                  <img src="imgs/sliders/slider3.jpg" alt="..." class="img-responsive" style="width: 100%">
-                  <div class="carousel-caption">
-                    <h2>دعنا نشاركك أجمل اللحظات لديك، ونهتم بأدق التفاصيل</h2>
-                    <p>
-                    تفاصيل مناسباتك بتقديم مجموعة من مختصي تنظيم الحفلات لتختار ما يناسبك	
-                    </p>
-                    <a href="#" class="btn btn-default btn-lg">احجز الان</a>
-                  </div>
-                </div>
-              </div>
-            
-              <!-- Controls -->
-              <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-              </a>
-              <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-              </a>
-            </div>       
-    </section>
+    
     
     <section id="content">
 <?php
