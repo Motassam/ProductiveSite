@@ -115,7 +115,7 @@ if(isset($_POST['createBtn']))
           <td><input type="text" class="form-control" name="ln" id="ln" placeholder="ادخل اسم العائلة"></td>
         </tr>
         <tr>
-          <th>الاسم الاول</th>
+          <th>الجنسية</th>
           <td><input type="text" class="form-control" name="nationality" id="nationality" placeholder="ادخل الجنسية"></td>
         </tr>
         <tr>

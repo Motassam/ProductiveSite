@@ -5,7 +5,7 @@ if(isset($_POST['loginBtn']))
 	
 	
 	if(empty($_POST['username']))
-		$missing_input[] = 'ادخل اسم المستخدم';
+		$missing_input[] = 'فضلاً ادخل اسم المستخدم';
 	else
 		$username=$_POST['username'];
 		
